@@ -1,27 +1,30 @@
-<script>
-export default {
-  data() {
-    return {
-      contador: 0
-    }
-  },
-  methods: {
-    incrementarContador() {
-      this.contador++
-    },
-    decrementarContador() {
-      if(this.contador > 0){
-        this.contador--
-      }
-    }
-  },
-  resetar(){
-    this.contador = 0
-  },
-  mounted() {
-    console.log(`O valor inicial do contador é ${this.contador}.`)
-  }
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const contador = ref(0)
+
+function incrementarContador() {
+  contador.value++
 }
+function decrementarContador() {
+  contador.value--
+}
+// function maiorOuMenor(){
+//   if(contador.value >= 10){
+//     return `maior/igual`
+    
+//   }else{
+//     return `menor`
+//   }
+// }
+function resetar(){
+  contador.value = 0
+}
+
+
+onMounted(() => {
+  console.log(`O valor inicial do contador é ${contador.value}.`)
+})
 </script>
 
 <template>
@@ -29,11 +32,23 @@ export default {
   <button @click="decrementarContador">-</button>
   <button @click="resetar">C</button>
   <p>Valor do contador é: {{ contador }}</p>
+  <div id="vermelho" v-if="contador >= 10">
+    Numero maior/igual que dez
+  </div>
+  <div id="azul" v-else>
+  Numero menor que dez
+  </div>
 </template>
 
 <style scoped>
 button {
   font-weight: bold;
   cursor: pointer;
+}
+#vermelho{
+  color: red;
+}
+#azul{
+  color: blue;
 }
 </style>

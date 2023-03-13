@@ -89,7 +89,7 @@ button {
 }
 
 #azul {
-  color: blue;
+  color: green;
 }
 
 .info {
